@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 數據庫連接環境 -->
+<configuration>
+	<!-- 引入外部文件 URL:磁盤下 RESOURCE:類類路徑 -->
+	<!-- <properties resource="db.properties"></properties> -->
+	<!-- setting： setting： name： values -->
+	<!-- <settings> -->
+	<!-- <setting name="upper" value="true" /> -->
+	<!-- </settings> -->
+	<!-- 數據庫連接 -->
+	<!-- <environments default="development"> -->
+	<!-- <environment id="development"> -->
+	<!-- <transactionManager type="JDBC" /> -->
+	<!-- <dataSource type="POOLED"> -->
+	<!-- <property name="driver" value="${jbdc.driver}" /> -->
+	<!-- <property name="url" value="${jbdc.jdbcUrl}" /> -->
+	<!-- <property name="username" value="${jbdc.user}" /> -->
+	<!-- <property name="password" value="${jbdc.password}" /> -->
+	<!-- </dataSource> -->
+	<!-- </environment> -->
+	<!-- </environments> -->
+	<!-- SQL Mapper映射 -->
+	<!-- <mappers> -->
+	<!-- <package name="com.luoaijun.mapper"/> -->
+	<!-- <mapper resource="bookMap.xml" /> -->
+	<!-- </mappers> -->
+	<settings>
+		<!-- 映射下划线 到 驼峰命名 last_name ==>lastName -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 开启延迟加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- 指定加载的属性是全部还是按需 -->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>  
+</configuration>
+
+
+
+
+
+

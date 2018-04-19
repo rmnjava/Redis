@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- 组件扫描 -->
+	<context:component-scan base-package="com.luoaijun">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 引入外部文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jbdc.driver}"></property>
+		<property name="jdbcUrl" value="${jbdc.jdbcUrl}"></property>
+		<property name="user" value="${jbdc.user}"></property>
+		<property name="password" value="${jbdc.password}"></property>
+	</bean>
+	<!-- 整合MyBatis -->
+	<!-- 1.sqlsession -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 指定数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 指定MyBatis配置文件 -->
+		<property name="configLocation" value="classpath:myBatis.xml"></property>
+		<!-- 指定SQL映射文件 -->
+		<property name="mapperLocations" value="classpath:com.luoaijun.redis.mapper.*.xml"></property>
+	</bean>
+	<!-- 2.mapper对象的代理实现类对象 -->
+	<mybatis-spring:scan base-package="com.luoaijun.redis.mapper" />
+
+</beans>
